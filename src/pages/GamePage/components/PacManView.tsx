@@ -25,7 +25,12 @@ const PAC_MAN_HEIGHT = SCREEN_TILE_SIZE * 2;
 const PAC_MAN_OFFSET_X = PAC_MAN_WIDTH / 2 - 2;
 const PAC_MAN_OFFSET_Y = PAC_MAN_HEIGHT / 2 - 2;
 
-export const PacManView: FC = observer(() => {
+interface PacManViewProps {
+  selectedPet: string | null;
+}
+
+export const PacManView: FC<PacManViewProps> = observer(({ selectedPet }) => {
+  // console.log(selectedPet)
   const store = useStore();
   const game = useGame();
   const pacMan = game.pacMan;
@@ -47,6 +52,7 @@ export const PacManView: FC = observer(() => {
           pacManAnimationPhase={pacManAnimationPhase}
           x={screenCoordinates.x + SCREEN_TILE_CENTER - PAC_MAN_OFFSET_X}
           y={screenCoordinates.y + SCREEN_TILE_CENTER - PAC_MAN_OFFSET_Y}
+          selectedPet={selectedPet}
         />
       )}
       {dead && (
@@ -54,6 +60,7 @@ export const PacManView: FC = observer(() => {
           dyingPacManAnimationPhase={dyingPhase}
           x={screenCoordinates.x + SCREEN_TILE_CENTER - PAC_MAN_OFFSET_X}
           y={screenCoordinates.y + SCREEN_TILE_CENTER - PAC_MAN_OFFSET_Y}
+          selectedPet={selectedPet}
         />
       )}
     </>
@@ -71,13 +78,15 @@ export const PacManSprite: FC<{
   pacManAnimationPhase: PacManAnimationPhase;
   x: number;
   y: number;
+  selectedPet: string | null;
   style?: CSSProperties;
-}> = ({ direction, pacManAnimationPhase, x, y, style }) => (
+}> = ({ direction, pacManAnimationPhase, x, y, selectedPet, style }) => (
   <Sprite
     className="Sprite-pacman"
     name={`pacman-direction-${direction}-phase-${pacManAnimationPhase}`}
     x={x}
     y={y}
+    selectedPet={selectedPet}
     style={style}
   />
 );
@@ -87,13 +96,15 @@ export const DyingPacManSprite: FC<{
   x: number;
   y: number;
   style?: CSSProperties;
-}> = ({ dyingPacManAnimationPhase, x, y, style }) => (
+  selectedPet: string | null;
+}> = ({ dyingPacManAnimationPhase, x, y, style, selectedPet }) => (
   <Sprite
     className="Sprite-dying-pacman"
     name={`dying-pacman-phase-${dyingPacManAnimationPhase}`}
     x={x}
     y={y}
     style={style}
+    selectedPet={selectedPet}
   />
 );
 

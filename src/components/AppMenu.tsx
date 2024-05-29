@@ -1,4 +1,5 @@
 import { Menu } from 'antd';
+import ClickParam from 'antd/lib/menu';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
@@ -18,9 +19,9 @@ export const AppMenu: React.FC = () => {
         selectedKeys={[selectedKey]}
       >
         <Menu.Item key="/">Home</Menu.Item>
-        <Menu.Item key="/sprites">Sprites</Menu.Item>
+        {/* <Menu.Item key="/sprites">Sprites</Menu.Item>
         <Menu.Item key="/maze">Maze</Menu.Item>
-        <Menu.Item key="/way-finding">Way Finding</Menu.Item>
+        <Menu.Item key="/way-finding">Way Finding</Menu.Item> */}
       </MenuStyled>
       <VSpace size="large" />
     </div>

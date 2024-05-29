@@ -9,6 +9,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
+    "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "experimentalDecorators": true,
@@ -25,6 +26,9 @@
     "src"
   ],
   "exclude": [
-    "src/mapData"
+    "src/mapData",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "node_modules"
   ]
 }

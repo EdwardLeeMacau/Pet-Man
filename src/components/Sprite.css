@@ -6,6 +6,19 @@
   /* Propagate mouse clicks and hover down to the underlying grid*/
   pointer-events: none;
 }
+@keyframes flash {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+.dead-pacman {
+  animation: flash 0.5s infinite;
+  z-index: 1000;
+}
 
 .Sprite-ghost {
   width: 16px;

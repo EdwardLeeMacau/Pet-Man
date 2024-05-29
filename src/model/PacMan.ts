@@ -30,6 +30,8 @@ export class PacMan {
     if (!state.changed) {
       return;
     }
+
+    // this.game.store.socket?.emit('pacman', { 'event': state.value });
     this.stateChartState = state;
   }
 
@@ -51,6 +53,18 @@ export class PacMan {
   @action.bound
   onDead() {
     this.diedAtTimestamp = this.game.timestamp;
+    this.game.store.socket?.emit('dead', {
+      'remainLives': this.extraLivesLeft,
+      'srcId': this.game.store.srcKiller,
+    });
+
+    if (this.extraLivesLeft)
+      return;
+
+    setTimeout(() => {
+      this.game.store.setPlaying?.(false);
+      this.game.store.soundGameOver?.('/track/game-over.mp3');
+    }, 2000);
   }
 
   @computed

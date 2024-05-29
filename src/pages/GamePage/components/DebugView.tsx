@@ -4,13 +4,20 @@ import styled from 'styled-components/macro';
 import { EnergizerDebugView } from './EnergizerDebugView';
 import { GhostsDebugView } from './GhostsDebugView';
 import { PacManDebugView } from './PacManDebugView';
+import { PlayerDebugView } from './PlayerDebugView';
 import { GameDebugView } from './GameDebugView';
 
-export const DebugView: FC<{ className?: string }> = ({ className }) => {
+interface Props {
+  playerCount: number;
+  className?: string
+}
+
+export const DebugView: FC<Props> = ({ playerCount, className }) => {
   return (
     <Layout className={className}>
       <CardInline>
         <Space direction="vertical" size="large">
+          <PlayerDebugView playerCount={playerCount}/>
           <GameDebugView />
           <PacManDebugView />
           <GhostsDebugView />

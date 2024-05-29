@@ -1,0 +1,41 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "collision",
+  "steps": [
+    {
+      "file": "src/model/detectCollisions.ts",
+      "description": "Trace Pacman collision event here.",
+      "line": 123
+    },
+    {
+      "file": "src/model/detectCollisions.ts",
+      "description": "Disable these 2 lines to enter transparent model.",
+      "line": 115
+    },
+    {
+      "file": "src/model/PacManStateChart.ts",
+      "description": "Triggered by `game.pacMan.send(event)` in `detectCollisions.ts`.",
+      "line": 26
+    },
+    {
+      "file": "src/model/PacManStateChart.ts",
+      "description": "The bahavior of collision is described by a StateMachine.\nBy definition of module `xstate`, they support triggering function during state transition.",
+      "line": 62
+    },
+    {
+      "file": "src/model/PacMan.ts",
+      "description": "The author uses `interpret()` to create a StateMachine, then set a callback function to capture state transition.\n\nFor now, he only backups `state` to `PacMan`. We can extend the behavior of pacman eating items here.\n\nLimitation: \n1. The state transition for PacMan and Ghosts are separately implemented. Therefore, you need to modify `Ghost.handleTransition()` also",
+      "line": 34
+    },
+    {
+      "file": "src/model/Ghost.ts",
+      "description": "We can `attack` other players here.",
+      "line": 68
+    },
+    {
+      "file": "src/pages/GamePage/components/GhostsView.tsx",
+      "description": "It's expected to spawn ghosts according to the number of ghosts. However, it's not working.",
+      "line": 59
+    }
+  ]
+}

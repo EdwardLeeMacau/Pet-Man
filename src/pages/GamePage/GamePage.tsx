@@ -1,8 +1,12 @@
 import { Row } from 'antd';
 import { observer } from 'mobx-react-lite';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import io from 'socket.io-client';
 import styled from 'styled-components/macro';
 import { Board } from '../../components/Board';
+import { VSpace } from '../../components/Spacer';
+import { useStore } from '../../components/StoreContext';
+import { useGameLoop } from '../../model/useGameLoop';
 import { DebugView } from './components/DebugView';
 import { ExtraLives } from './components/ExtraLives';
 import { GameOver } from './components/GameOver';
@@ -11,19 +15,34 @@ import { MazeView } from './components/MazeView';
 import { PacManView } from './components/PacManView';
 import { PillsView } from './components/PillsView';
 import { Score } from './components/Score';
-import { useStore } from '../../components/StoreContext';
 import { useKeyboardActions } from './components/useKeyboardActions';
-import { VSpace } from '../../components/Spacer';
-import { useGameLoop } from '../../model/useGameLoop';
 
 export const GamePage: React.FC = observer(() => {
   const store = useStore();
+
+  const [playerCount, setPlayerCount] = useState(0);
+
   useEffect(() => {
+    // ! the game server is running on another port.
+    const socket = io('http://localhost:3001');
+
+    // the client sends his or her name to the server
+    socket.emit('players', { 'name': (Math.random() + 1).toString(36).substring(7) });
+
+    // the server updates the player list in real-time.
+    socket.on('players', (msg) => {
+      // console.log(msg);              // debug usage
+      setPlayerCount(msg.playerCount);
+    });
+
     store.resetGame();
+    store.socket = socket;
     return () => {
       store.game.gamePaused = true;
+      socket.disconnect();
     };
-    // eslint-disable-next-line  react-hooks/exhaustive-deps
+
+    // eslint-disable-next-line
   }, []);
 
   useGameLoop();
@@ -44,18 +63,18 @@ export const GamePage: React.FC = observer(() => {
         <Board>
           <MazeView />
           <PillsView />
-          <PacManView />
+          {/* <PacManView /> */}
           <GhostsGameView />
           <GameOver />
         </Board>
         <VSpace size="large" />
         <Row justify="center">
-          <ExtraLives />
+          {/* <ExtraLives /> */}
         </Row>
       </BoardArea>
 
       <DebugArea>
-        <DebugView />
+        <DebugView playerCount={playerCount}/>
       </DebugArea>
     </Layout>
   );

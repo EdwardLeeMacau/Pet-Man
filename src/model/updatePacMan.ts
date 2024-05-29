@@ -59,5 +59,6 @@ const revivePacMan = (pacMan: PacMan) => {
   if (pacMan.extraLivesLeft > 0) {
     pacMan.extraLivesLeft -= 1;
     pacMan.game.revivePacMan();
+    pacMan.game.store.srcKiller = null;
   }
 };

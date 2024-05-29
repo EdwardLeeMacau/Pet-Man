@@ -7,18 +7,23 @@ import { PacManSprite } from './PacManView';
 import { times } from 'lodash';
 import { SCALE_FACTOR } from '../../../model/Coordinates';
 
-export const ExtraLives = observer<{ className?: string }>(({ className }) => {
+interface PacManViewProps {
+  selectedPet: string | null;
+}
+
+export const ExtraLives = observer<{ className?: string, selectedPet: string | null }>(({ className, selectedPet }) => {
   const game = useGame();
   return (
-    <Layout className={classNames('ExtraLives', className)}>
+    <Layout className={classNames('ExtraLives', className)}>      
       <span>
         {times(game.pacMan.extraLivesLeft, n => (
           <PacManSprite
             key={n}
-            direction="LEFT"
+            direction="DOWN"
             pacManAnimationPhase={1}
-            x={n * 20 * SCALE_FACTOR}
-            y={0}
+            x={0}
+            y={n * 20 * SCALE_FACTOR}
+            selectedPet={selectedPet}
           />
         ))}
       </span>
@@ -29,6 +34,7 @@ export const ExtraLives = observer<{ className?: string }>(({ className }) => {
 const Layout = styled.div`
   display: inline-flex;
   position: relative;
-  width: calc(1 * 40px * var(--SCALE_FACTOR));
+  justify-content: center;
+  align-items: center;
   height: calc(16px * var(--SCALE_FACTOR));
 `;

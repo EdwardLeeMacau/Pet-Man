@@ -4,7 +4,7 @@ body {
   --SPRITE_TILE_SIZE: 8px;
   --SCREEN_TILE_SIZE: calc(var(--SCALE_FACTOR) * var(--SPRITE_TILE_SIZE));
 
-  background-color: black;
+  background-color: white;
   padding: 0;
   margin: 0;
   color: white;

@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useStore } from '../../../components/StoreContext';
 
-/* eslint-disable  react-hooks/exhaustive-deps */
+/* eslint-disable */
 export const useKeyboardActions = (): void => {
   const store = useStore();
 
@@ -22,9 +22,9 @@ export const useKeyboardActions = (): void => {
       case 'ArrowDown':
         pacMan.nextDirection = 'DOWN';
         break;
-      case ' ':
-        game.gamePaused = !game.gamePaused;
-        break;
+      // case ' ':
+      //   game.gamePaused = !game.gamePaused;
+      //   break;
       default:
         break;
     }

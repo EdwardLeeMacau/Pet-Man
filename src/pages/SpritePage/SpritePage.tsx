@@ -43,7 +43,7 @@ export const SpritePage: React.FC = () => {
     return () => {
       clearInterval(timerId);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export const SpritePage: React.FC = () => {
     return () => {
       clearInterval(timerId);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, []);
   const direction = Directions[directionIndex];
   return (

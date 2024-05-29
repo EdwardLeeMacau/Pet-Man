@@ -1,0 +1,26 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "framerate",
+  "steps": [
+    {
+      "file": "src/model/useAnimationLoop.ts",
+      "description": "The framerate can be locked by limiting rate/frequence of calling `animationStep()`.\r\n\r\nThe function `requestAnimationFrame` follows the highest screen refresh rate of the browser :), which is not expected in multi-player games.",
+      "line": 29
+    },
+    {
+      "file": "src/model/Game.ts",
+      "description": "After limited framerate, we can boost game speed here.\r\n\r\nHowever, to keep game logic non-crashed, 20 must be divisible by the speed.",
+      "line": 10
+    },
+    {
+      "file": "src/model/useGameLoop.ts",
+      "description": "The function `useGameLoop` passes the render function `animationStep` to lower logic.",
+      "line": 13
+    },
+    {
+      "file": "src/model/onAnimationFrame.ts",
+      "description": "The Game instance receives/infers timedelta here.",
+      "line": 13
+    }
+  ]
+}
